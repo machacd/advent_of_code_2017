@@ -1,12 +1,11 @@
 /part 1
 
 input:347991
-input:15
 
 b:1+til input
 c:b where b mod 2
 corner:max sums c*input > sums c
-next_corner:1+sqrt corner
+next_corner:1+sqrt corner /it's sqrt actually
 dx:floor div[-1+sqrt corner;2]
 dy:floor div[sqrt corner;2]
 0N!dx_c:abs dx+1-0|input-corner+next_corner
@@ -14,5 +13,6 @@ dy:floor div[sqrt corner;2]
 dx_c+dy_c
 
 /part 2
+
 
 
