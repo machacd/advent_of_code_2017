@@ -14,5 +14,9 @@ dx_c+dy_c
 
 /part 2
 
+/ from streetster.github.io
+l:0 0
+l+: 1 0
+g:(enlist l)!enlist 1
 
-
+0^g l +/:(0 1; 1 0; 0 -1; -1 0)
