@@ -24,4 +24,12 @@ d:"b"$0^\:g l +/:(0 1; 1 0; 0 -1; -1 0)
 sum g l +/:(0 1; 1 0; 0 -1; -1 0), g l +/:(1 1; 1 -1; 1 -1; -1 1)
 
 
-([] (ioan:til 4)!([] kuh:1+til 4; r: 1-til 4)
+
+
+q:([] ioan:til 4)!([] kuh:1+til 4; r:1-til 4)
+
+
+c:(),`h`n
+sc:{c:(), x; ?[`q;();0b;c!c]}
+sc reverse cols q
+
