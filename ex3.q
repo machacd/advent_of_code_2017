@@ -16,7 +16,12 @@ dx_c+dy_c
 
 / from streetster.github.io
 l:0 0
-l+: 1 0
 g:(enlist l)!enlist 1
+l+: 1 0
 
-0^g l +/:(0 1; 1 0; 0 -1; -1 0)
+d:"b"$0^\:g l +/:(0 1; 1 0; 0 -1; -1 0)
+
+sum g l +/:(0 1; 1 0; 0 -1; -1 0), g l +/:(1 1; 1 -1; 1 -1; -1 1)
+
+
+([] (ioan:til 4)!([] kuh:1+til 4; r: 1-til 4)
