@@ -19,16 +19,19 @@ l:0 0
 g:(enlist l)!enlist 1
 l+: 1 0
 
-d:"b"$0^\:g l +/:(0 1; 1 0; 0 -1; -1 0)
 
-sum g l +/:(0 1; 1 0; 0 -1; -1 0), g l +/:(1 1; 1 -1; 1 -1; -1 1)
+while[input>g[l]:sum (n:g l +/:(0 1; 1 0; 0 -1; -1 0)), g l +/:(1 1; 1 -1; -1 -1; -1 1); 
+ $[(d:"b"$0^n) in (0001b; 0011b);
+  l+:0 1; /move north
+  d in (0010b; 0110b);
+  l+:-1 0; /move west
+  d in (1100b; 0100b);
+  l+:0 -1; /move south
+  l+:1 0 /move east
+  ]
+ ]
 
-
-
-
-q:([] ioan:til 4)!([] kuh:1+til 4; r:1-til 4)
-
-
+/ functional select for later
 c:(),`h`n
 sc:{c:(), x; ?[`q;();0b;c!c]}
 sc reverse cols q
