@@ -6,8 +6,14 @@ update comp:(count exec comp from t where comp~\:"!=")#enlist "<>" from `t where
 update comp:(count exec comp from t where comp~\:"==")#enlist "=" from `t where comp~\:"=="
 
 res:select n:(distinct res) from t /list of all registers
-eval each parse each (exec res from t),\:":0" /inivals
-eval each parse each "if[",/:(exec oprnd from t),'(exec comp from t),'(exec g from t),'";",'(exec res from t),'":",'(exec res from t),'(exec act from t),'(exec c from t),\:"]" /eval conditions and then eventually the expressions
-0N!max eval each parse each exec n from res
+eval each parse each (exec res from t),\:":0" /inivals (newly created vars)
+maxObserve:0
+eval each parse each "if[",/:(exec oprnd from t),'(exec comp from t),'(exec g from t),'";",'(exec res from t),'":",'(exec res from t),'(exec act from t),'(exec c from t),'";maxObserve:maxObserve|",/:(exec res from t),\:"]" /eval conditions and then eventually the expressions
+0N!max eval each parse each exec n from res /result part 1
+
+
+
+
+
 
 
