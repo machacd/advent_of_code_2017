@@ -1,15 +1,36 @@
-t:flip (`res`act`c`d`oprnd`comp`g)!( flip " " vs/: read0 `:/Users/david/advent_of_code_2017/ex8_input.q)
-delete d from `t
-update act:"+" from `t where act~\:"inc"
-update act:"-" from `t where act~\:"dec"
-update comp:(count exec comp from t where comp~\:"!=")#enlist "<>" from `t where comp~\:"!=" /ugly but what is the other option? nested list is not automatically expanded into the parent list
-update comp:(count exec comp from t where comp~\:"==")#enlist "=" from `t where comp~\:"=="
+inp:raze read0 `:/Users/david/advent_of_code_2017/ex9_input
 
-res:select n:(distinct res) from t /list of all registers
-eval each parse each (exec res from t),\:":0" /inivals (newly created vars)
-maxObserve:0
-eval each parse each "if[",/:(exec oprnd from t),'(exec comp from t),'(exec g from t),'";",'(exec res from t),'":",'(exec res from t),'(exec act from t),'(exec c from t),'";maxObserve:maxObserve|",/:(exec res from t),\:"]" /eval conditions and then eventually the expressions
-0N!max eval each parse each exec n from res /result part 1
+/part 1
+
+run:1b
+/removes cancels 
+while[run;
+ excs:"!" = inp;
+ rm:(b+1),b:a where 1=(til count a:where differ excs) mod 2;
+ inp:inp where 0=(til 0N!count  inp) in rm;
+ $[0=0N!count rm;run:0b;run:1b];
+ ]
+
+/removes garbage
+gar:(inp="<")+neg inp=">"
+limitSum:{[x;y]
+ 1&x+y}
+inp:inp[where 0=(0 | neg gar) + 0 limitSum\ gar]
+
+/find self contained groups, note their positions, sum their scores
+positions:flip(`pos`opens`closes)!(til count inp;"{"=inp;neg "}"=inp)
+/ } lowers the score by one, these positions only are used for the final score sum
+/ with an added 1 to account for the clasing bracket
+a:0+\exec opens+closes from positions where (opens=1) | closes=-1
+sum (a+1) where a<0,-1_a
+
+/part 2
+allg:sum 0 limitSum\ gar / still need to remove the garbage initializer
+stag:(neg 1-count where differ 0 limitSum\ gar)%2
+allg-stag
+
+
+
 
 
 
